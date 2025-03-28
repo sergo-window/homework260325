@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Main {
     public static String calculateLeapYear(int year) {
         if ((year % 4 == 0) && year % 100 != 0 || year % 400 == 0) {
@@ -8,16 +10,13 @@ public class Main {
     }
 
     public static void offerAppVersion(byte clientOS, int clientDeviceYear) {
-        if (clientOS == 0) {
-            if (clientDeviceYear >= 2015) {
-                System.out.println("Установите версию приложения для iOS по ссылке");
-            } else {
-                System.out.println("Установите облегченную версию приложения для iOS по ссылке");
-            }
-        } else if (clientOS == 1) {
-            if (clientDeviceYear >= 2015) {
-                System.out.println("Установите версию приложения для Android по ссылке");
-            }
+        int currentYear = LocalDate.now().getYear();
+        if (clientOS == 0 && clientDeviceYear >= currentYear) {
+            System.out.println("Установите версию приложения для iOS по ссылке");
+        } else if (clientOS == 0) {
+            System.out.println("Установите облегченную версию приложения для iOS по ссылке");
+        } else if (clientOS == 1 && clientDeviceYear >= currentYear) {
+            System.out.println("Установите версию приложения для Android по ссылке");
         } else {
             System.out.println("Установите облегченную версию приложения для Android по ссылке");
         }
@@ -47,8 +46,8 @@ public class Main {
         int year = 2025;
         System.out.println(calculateLeapYear(year));
         System.out.println("Задача 2");
-        byte clientOS = 0;
-        int clientDeviceYear = 2010;
+        byte clientOS = 1;
+        int clientDeviceYear = 2020;
         offerAppVersion(clientOS, clientDeviceYear);
         System.out.println("Задача 3");
         int distance = 75;
